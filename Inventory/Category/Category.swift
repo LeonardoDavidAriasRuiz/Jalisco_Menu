@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct NewCategory {
+struct Category {
     var name: String = "-"
     var red: Double = 0.207
     var green: Double = 0.78

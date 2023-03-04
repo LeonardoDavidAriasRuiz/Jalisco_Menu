@@ -5,7 +5,7 @@
 //  Created by Felipe Arias on 06/12/22.
 //
 
-import Foundation
+
 import CoreData
 import SwiftUI
 
@@ -21,7 +21,7 @@ class CoreDataManager {
         return container
     }()
     
-    var context: NSManagedObjectContext {
+    private var context: NSManagedObjectContext {
         return Self.persistentContainer.viewContext
     }
     

@@ -18,7 +18,7 @@ struct CategoryView: View {
     
     @State private var products = CoreDataManager().allProducts()
     @State private var categories = CoreDataManager().allCategories()
-    @State private var categoryUpdate = NewCategory()
+    @State private var categoryUpdate = Category()
     @State private var newProduct = NewProduct()
     
     let category: CategoryProduct

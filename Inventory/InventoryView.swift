@@ -23,6 +23,7 @@ struct InventoryView: View {
     }
 }
 
+
 struct Titles {
     var category: some View {
         HStack {

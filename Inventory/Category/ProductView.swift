@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ProductView: View {
     
     @State private var groups = CoreDataManager().allGroups()

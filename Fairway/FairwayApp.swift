@@ -11,9 +11,10 @@ import CoreData
 @main
 struct FairwayApp: App {
     @State var titulo = ""
+    let inventory = Inventory()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(inventory)
         }
     }
 }

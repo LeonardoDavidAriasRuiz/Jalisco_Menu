@@ -14,8 +14,8 @@ struct AllCategoriesView: View {
     @State private var updateView = false
     @State private var new = false
     
-    @State private var categories = CoreDataManager().allCategories()
-    @State private var newCategory = NewCategory()
+    @EnvironmentObject private var inventory: Inventory
+    @State private var newCategory = Category()
     
     
     var body: some View {
@@ -25,7 +25,6 @@ struct AllCategoriesView: View {
             categoryList
         }
         .navigationTitle(navigationTitle)
-        .onAppear(perform: getCategoriesList)
         .background(Color("background"))
         .toolbar {
             Menu {
@@ -40,7 +39,7 @@ struct AllCategoriesView: View {
     
     var categoryList: some View {
         List {
-            ForEach(categories, id: \.self) {category in
+            ForEach(inventory.categories, id: \.self) {category in
                 NavigationLink(
                     destination:
                         CategoryView(category: category),
@@ -82,7 +81,7 @@ struct AllCategoriesView: View {
     func saveNewCategory() {
         withAnimation{
             coreDM.createCategory(name: newCategory.name, color: newCategory.color)
-            categories = coreDM.allCategories()
+            inventory.categories = coreDM.allCategories()
             new = false
             newCategory.name = "-"
             newCategory.color = Color.green
@@ -97,20 +96,15 @@ struct AllCategoriesView: View {
     }
     
     func moveFromList(indexSet: IndexSet, int: Int) {
-        categories.move(fromOffsets: indexSet, toOffset: int)
+        inventory.categories.move(fromOffsets: indexSet, toOffset: int)
         coreDM.update()
     }
     
     func deleteFromList(indexSet: IndexSet) {
         indexSet.forEach { index in
-            let groupCategory = categories[index]
+            let groupCategory = inventory.categories[index]
             coreDM.deleteCategory(categoryProduct: groupCategory)
-            getCategoriesList()
         }
-    }
-    
-    func getCategoriesList() {
-        categories = coreDM.allCategories()
     }
 }
 
