@@ -8,9 +8,9 @@
 import Foundation
 
 struct ProductInOrder: Identifiable{
-    let id = UUID()
-    let idOrder: UUID
-    let idProduct: UUID
+    let id = Int16()
+    let idOrder: Int16
+    let idProduct: Int16
     var quantity: Int
     
     func hash(into hasher: inout Hasher) {

@@ -15,13 +15,13 @@ struct CreateOrderView: View {
     @State var quantitySelected: Int = 1
     @State var itemSelected = false
     @State var customItemActive = false
-    @State var selectedProducts = [Product]()
-    @State var selectedCategory = CategoryProduct()
+    @State var selectedProducts = [CDProduct]()
+    @State var selectedCategory = CDCategory()
     
-    @State var products: [Product] = [Product]()
-    @State var extras: [Extra] = [Extra]()
-    @State var categoryProducts: [CategoryProduct] = [CategoryProduct]()
-    @State var groupExtras: [GroupExtra] = [GroupExtra]()
+    @State var products: [CDProduct] = [CDProduct]()
+    @State var extras: [CDExtra] = [CDExtra]()
+    @State var categoryProducts: [CDCategory] = [CDCategory]()
+    @State var groupExtras: [CDGroup] = [CDGroup]()
     
 //    @Binding var categoryProduct: [CategoryProduct]
 //    @Binding var products: [Product]

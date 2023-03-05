@@ -10,7 +10,7 @@ import SwiftUI
 struct NewGroup: View {
     @State var name = "-"
     @State var color = Color.green
-    @Binding var groupExtra: [GroupExtra]
+    @Binding var group: [CDGroup]
     let coreDM: CoreDataManager
     
     var body: some View {
@@ -25,7 +25,7 @@ struct NewGroup: View {
     func saveNewGroup() {
         withAnimation {
             coreDM.createGroup(name: name)
-            groupExtra = coreDM.allGroups()
+            group = coreDM.allGroups()
         }
     }
 }

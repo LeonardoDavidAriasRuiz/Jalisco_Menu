@@ -16,7 +16,7 @@ struct NewExtraView: View {
     @State var color = Color.green
     
     let coreDM: CoreDataManager
-    @Binding var extras: [Extra]
+    @Binding var extras: [CDExtra]
     
     var body: some View {
         VStack {

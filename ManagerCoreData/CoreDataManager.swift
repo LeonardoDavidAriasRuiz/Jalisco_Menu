@@ -34,8 +34,8 @@ class CoreDataManager {
     }
     
     func createProduct(newProduct: NewProduct) {
-        let product = Product(context: context)
-        product.id = UUID()
+        let product = CDProduct(context: context)
+        product.id = 1
         product.name = newProduct.name
         product.printer = newProduct.printer
         product.color = newProduct.color.hex
@@ -49,8 +49,8 @@ class CoreDataManager {
         }
     }
     
-    func allProducts() -> [Product] {
-        let fetchRequest: NSFetchRequest<Product> = Product.fetchRequest()
+    func allProducts() -> [CDProduct] {
+        let fetchRequest: NSFetchRequest<CDProduct> = CDProduct.fetchRequest()
         do {
             return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
@@ -58,7 +58,7 @@ class CoreDataManager {
         }
     }
     
-    func deleteProduct(product: Product) {
+    func deleteProduct(product: CDProduct) {
         
         CoreDataManager.persistentContainer.viewContext.delete(product)
         
@@ -72,8 +72,8 @@ class CoreDataManager {
     }
     
     func createExtra(name: String,printer: String, priceDD: Double, priceGH: Double, priceRE: Double) {
-        let extra = Extra(context: context)
-        extra.id = UUID()
+        let extra = CDExtra(context: context)
+        extra.id = 1
         extra.name = name
         extra.printer = printer
         extra.dd = priceDD
@@ -87,8 +87,8 @@ class CoreDataManager {
         }
     }
     
-    func allExtras() -> [Extra] {
-        let fetchRequest: NSFetchRequest<Extra> = Extra.fetchRequest()
+    func allExtras() -> [CDExtra] {
+        let fetchRequest: NSFetchRequest<CDExtra> = CDExtra.fetchRequest()
         do {
             return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
@@ -96,7 +96,7 @@ class CoreDataManager {
         }
     }
     
-    func deleteExtra(extra: Extra) {
+    func deleteExtra(extra: CDExtra) {
         
         CoreDataManager.persistentContainer.viewContext.delete(extra)
         
@@ -109,11 +109,11 @@ class CoreDataManager {
         
     }
     
-    func createCategory(name: String, color: Color) {
-        let category = CategoryProduct(context: context)
-        category.id = UUID()
-        category.name = name
-        category.color = color.hex
+    func createCategory(category: Category) {
+        let CDcategory = CDCategory(context: context)
+        CDcategory.id = 1
+        CDcategory.name = category.name
+        CDcategory.color = category.color.hex
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()
@@ -122,8 +122,8 @@ class CoreDataManager {
         }
     }
     
-    func allCategories() -> [CategoryProduct] {
-        let fetchRequest: NSFetchRequest<CategoryProduct> = CategoryProduct.fetchRequest()
+    func allCategories() -> [CDCategory] {
+        let fetchRequest: NSFetchRequest<CDCategory> = CDCategory.fetchRequest()
         do {
             return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
@@ -131,9 +131,9 @@ class CoreDataManager {
         }
     }
     
-    func deleteCategory(categoryProduct: CategoryProduct) {
+    func deleteCategory(category: CDCategory) {
         
-        CoreDataManager.persistentContainer.viewContext.delete(categoryProduct)
+        CoreDataManager.persistentContainer.viewContext.delete(category)
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()
@@ -144,8 +144,8 @@ class CoreDataManager {
     }
     
     func createGroup(name: String) {
-        let groupExtra = GroupExtra(context: context)
-        groupExtra.id = UUID()
+        let groupExtra = CDGroup(context: context)
+        groupExtra.id = 1
         groupExtra.name = name
         
         do {
@@ -155,8 +155,8 @@ class CoreDataManager {
         }
     }
     
-    func allGroups() -> [GroupExtra] {
-        let fetchRequest: NSFetchRequest<GroupExtra> = GroupExtra.fetchRequest()
+    func allGroups() -> [CDGroup] {
+        let fetchRequest: NSFetchRequest<CDGroup> = CDGroup.fetchRequest()
         do {
             return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
@@ -164,9 +164,9 @@ class CoreDataManager {
         }
     }
     
-    func deleteGroup(groupExtra: GroupExtra) {
+    func deleteGroup(CDgroup: CDGroup) {
         
-        CoreDataManager.persistentContainer.viewContext.delete(groupExtra)
+        CoreDataManager.persistentContainer.viewContext.delete(CDgroup)
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()
@@ -177,8 +177,8 @@ class CoreDataManager {
     }
     
     func createOrder(newOrder: NewOrder) {
-        let order = Order(context: context)
-        order.id = newOrder.id
+        let order = CDOrder(context: context)
+        order.id = 1
         order.date = newOrder.date
         order.type = newOrder.type
         order.name = newOrder.name
@@ -191,8 +191,8 @@ class CoreDataManager {
         }
     }
     
-    func allOrders() -> [Order] {
-        let fetchRequest: NSFetchRequest<Order> = Order.fetchRequest()
+    func allOrders() -> [CDOrder] {
+        let fetchRequest: NSFetchRequest<CDOrder> = CDOrder.fetchRequest()
         do {
             return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
         } catch {
@@ -200,74 +200,9 @@ class CoreDataManager {
         }
     }
     
-    func deleteOrder(order: Order) {
+    func deleteOrder(CDorder: CDOrder) {
         
-        CoreDataManager.persistentContainer.viewContext.delete(order)
-        
-        do {
-            try CoreDataManager.persistentContainer.viewContext.save()
-        } catch {
-            CoreDataManager.persistentContainer.viewContext.rollback()
-            print("Failed to save context \(error)")
-        }
-    }
-    
-    func createOrderProduct(idOrder: UUID, idProduct: UUID, quantity: Int) {
-        let orderProduct = OrderProduct(context: context)
-        orderProduct.idOrder = idOrder
-        orderProduct.idProduct = idProduct
-        orderProduct.quantity = Int16(quantity)
-        
-        do {
-            try CoreDataManager.persistentContainer.viewContext.save()
-        } catch {
-            print("Fail to save the product \(error)")
-        }
-    }
-    
-    func allOrderProducts() -> [OrderProduct] {
-        let fetchRequest: NSFetchRequest<OrderProduct> = OrderProduct.fetchRequest()
-        do {
-            return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-        } catch {
-            return []
-        }
-    }
-    
-    func deleteOrderProduct(orderProduct: OrderProduct) {
-        CoreDataManager.persistentContainer.viewContext.delete(orderProduct)
-        
-        do {
-            try CoreDataManager.persistentContainer.viewContext.save()
-        } catch {
-            CoreDataManager.persistentContainer.viewContext.rollback()
-            print("Failed to save context \(error)")
-        }
-    }
-    
-    func createGroupsProduct(idGroup: UUID, idProduct: UUID) {
-        let grousProduct = GroupsProduct(context: context)
-        grousProduct.idGroup = idGroup
-        grousProduct.idProduct = idProduct
-        
-        do {
-            try CoreDataManager.persistentContainer.viewContext.save()
-        } catch {
-            print("Fail to save the product \(error)")
-        }
-    }
-    
-    func allGroupsProduct() -> [GroupsProduct] {
-        let fetchRequest: NSFetchRequest<GroupsProduct> = GroupsProduct.fetchRequest()
-        do {
-            return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-        } catch {
-            return []
-        }
-    }
-    
-    func deleteGroupsProduct(grousProduct: GroupsProduct) {
-        CoreDataManager.persistentContainer.viewContext.delete(grousProduct)
+        CoreDataManager.persistentContainer.viewContext.delete(CDorder)
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()

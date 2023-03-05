@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllExtrasView: View {
     let coreDM: CoreDataManager
-    @Binding var extras: [Extra]
+    @Binding var extras: [CDExtra]
     @State var needsRefresh = false
     @State var name = ""
     

@@ -16,7 +16,7 @@ struct ContentView: View {
                 NavigationLink("Nueva Orden", destination: OptionView().navigationTitle("Nueva Orden"))
                 NavigationLink("Ordenes", destination: OrdersView().navigationTitle("Ordenes"))
                 Spacer()
-                NavigationLink("Inventario", destination: AllCategoriesView())
+                NavigationLink("Inventario", destination: InventoryView())
             }
             OptionView().navigationTitle("Nueva Orden")
         }

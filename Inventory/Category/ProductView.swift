@@ -16,14 +16,14 @@ struct ProductView: View {
     @State private var selected = false
     private let coreDM = CoreDataManager()
     
-    let product: Product
+    let product: CDProduct
     
     var body: some View {
         VStack {
             if update {
 //                getUpdateCategoryArea()
             }
-            groupsList
+//            groupsList
         }
         .navigationBarTitle(navigationTitle)
         .onAppear(perform: onAppear)
@@ -49,43 +49,43 @@ struct ProductView: View {
         GridItem()
     ]
     
-    var groupsList: some View {
-        LazyVGrid (columns: columns) {
-            ForEach(groups, id: \.self) { group in
-                Button {
-                    union(group: group)
-                } label: {
-                    SelectGroupOption(product: product, group: group, selected: $selected)
-                }
-            }
-        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).padding(35)
-    }
+//    var groupsList: some View {
+//        LazyVGrid (columns: columns) {
+//            ForEach(groups, id: \.self) { group in
+//                Button {
+//                    union(group: group)
+//                } label: {
+//                    SelectGroupOption(product: product, group: group, selected: $selected)
+//                }
+//            }
+//        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).padding(35)
+//    }
     
-    func union(group: GroupExtra) {
-        var encontrado = false
-        let groupsProduct = coreDM.allGroupsProduct()
-        if groupsProduct.isEmpty {
-            coreDM.createGroupsProduct(idGroup: group.id!, idProduct: product.id!)
-            groups = coreDM.allGroups()
-            selected = selected ? false : true
-            return
-        }
-        for union in groupsProduct {
-            if union.idProduct == product.id && union.idGroup == group.id {
-                coreDM.deleteGroupsProduct(grousProduct: union)
-                encontrado = true
-                groups = coreDM.allGroups()
-                selected = selected ? false : true
-                return
-            }
-        }
-        if !encontrado {
-            coreDM.createGroupsProduct(idGroup: group.id!, idProduct: product.id!)
-            groups = coreDM.allGroups()
-            selected = selected ? false : true
-            return
-        }
-    }
+//    func union(group: CDGroup) {
+//        var encontrado = false
+//        let groupsProduct = coreDM.allGroups()
+//        if groupsProduct.isEmpty {
+////            coreDM.createGroupsProduct(idGroup: group.id!, idProduct: product.id!)
+//            groups = coreDM.allGroups()
+//            selected = selected ? false : true
+//            return
+//        }
+//        for union in groupsProduct {
+////            if union.idProduct == product.id && union.idGroup == group.id {
+////                coreDM.deleteGroupsProduct(grousProduct: union)
+//                encontrado = true
+//                groups = coreDM.allGroups()
+//                selected = selected ? false : true
+//                return
+//            }
+//        }
+//        if !encontrado {
+//            coreDM.createGroupsProduct(idGroup: group.id!, idProduct: product.id!)
+//            groups = coreDM.allGroups()
+//            selected = selected ? false : true
+//            return
+//        }
+//    }
     
     func updateButtonAction() {
         update = true

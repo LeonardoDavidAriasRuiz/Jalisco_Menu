@@ -12,17 +12,17 @@ struct AllGroups: View {
     @State var new = false
     @State var name = ""
     @State var groupSelected = false
-    @State var grouptUpdate: GroupExtra = GroupExtra()
-    @Binding var groupExtras: [GroupExtra]
+    @State var grouptUpdate: CDGroup = CDGroup()
+    @Binding var groups: [CDGroup]
     
     var body: some View {
         VStack {
             if new {
-                NewGroup(groupExtra: $groupExtras, coreDM: coreDM)
+                NewGroup(group: $groups, coreDM: coreDM)
                     .navigationTitle("Nuevo Grupo")
             }
             if groupSelected {
-                GroupView(groupExtra: $grouptUpdate, groupExtras: $groupExtras, groupSelected: $groupSelected, coreDM: coreDM)
+                GroupView(group: $grouptUpdate, groups: $groups, groupSelected: $groupSelected, coreDM: coreDM)
                     .navigationTitle("\(grouptUpdate.name!)")
             }
             TitleList(title: "Nombre")
@@ -30,7 +30,7 @@ struct AllGroups: View {
                 .padding(.bottom, -7)
                 .padding(.horizontal, 30)
             List {
-                ForEach(groupExtras, id: \.self) { groupExtra in
+                ForEach(groups, id: \.self) { groupExtra in
                     Button(action: {
                         openUpdateProductView(group: groupExtra)
                     }, label: {
@@ -62,7 +62,7 @@ struct AllGroups: View {
         }
     }
     
-    func openUpdateProductView(group: GroupExtra) {
+    func openUpdateProductView(group: CDGroup) {
         withAnimation {
             grouptUpdate = group
             groupSelected = groupSelected ? false : true
@@ -71,18 +71,17 @@ struct AllGroups: View {
     }
     
     func moveFromList(indexSet: IndexSet, int: Int) {
-        groupExtras.move(fromOffsets: indexSet, toOffset: int)
+        groups.move(fromOffsets: indexSet, toOffset: int)
         coreDM.update()
     }
     
     func deleteFromList(indexSet: IndexSet) {
         indexSet.forEach { index in
-            let groupGroup = groupExtras[index]
-            coreDM.deleteGroup(groupExtra: groupGroup)
+            coreDM.deleteGroup(CDgroup: groups[index])
             getList()
         }
     }
     func getList() {
-        groupExtras = coreDM.allGroups()
+        groups = coreDM.allGroups()
     }
 }

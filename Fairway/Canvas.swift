@@ -40,28 +40,28 @@ extension View {
     }
 }
 
-struct SelectGroupOption: View {
-    let product: Product
-    let group: GroupExtra
-    @Binding var selected: Bool
-    var body: some View {
-        Text(group.name ?? "Error")
-            .frame(maxWidth: .infinity, minHeight: 50)
-            .foregroundColor(compareGroupProdct() ? Color.white : Color.blue)
-            .background(compareGroupProdct() ? Color.blue : Color.white)
-            .cornerRadius(10)
-    }
-    
-    func compareGroupProdct() -> Bool {
-        let groupsProduct = CoreDataManager().allGroupsProduct()
-        for union in groupsProduct {
-            if union.idProduct == product.id && union.idGroup == group.id {
-                return true
-            }
-        }
-        return false
-    }
-}
+//struct SelectGroupOption: View {
+//    let product: CDProduct
+//    let group: CDGroup
+//    @Binding var selected: Bool
+//    var body: some View {
+//        Text(group.name ?? "Error")
+//            .frame(maxWidth: .infinity, minHeight: 50)
+//            .foregroundColor(compareGroup() ? Color.white : Color.blue)
+//            .background(compareGroup() ? Color.blue : Color.white)
+//            .cornerRadius(10)
+//    }
+//    
+//    func compareGroup() -> Bool {
+//        let groupsProduct = CoreDataManager().allGroups()
+//        for union in groupsProduct {
+//            if union.idProduct == product.id && union.idGroup == group.id {
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//}
 
 struct MenuUpdate: View {
     @Binding var condition1: Bool
@@ -181,8 +181,8 @@ struct ChooseColor: View {
 }
 
 struct CategoryPicker: View {
-    @Binding var categories: [CategoryProduct]
-    @Binding var selectedCategory: CategoryProduct
+    @Binding var categories: [CDCategory]
+    @Binding var selectedCategory: CDCategory
     
     var body: some View {
         Picker("", selection: $selectedCategory) {

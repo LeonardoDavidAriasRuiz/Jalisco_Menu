@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CategoriesView: View {
     let coreDM: CoreDataManager
-    @Binding var selectedCategory: CategoryProduct
+    @Binding var selectedCategory: CDCategory
     
     var body: some View {
         List {

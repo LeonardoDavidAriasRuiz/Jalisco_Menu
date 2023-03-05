@@ -8,7 +8,7 @@
 import Foundation
 
 struct NewOrder {
-    let id: UUID = UUID()
+    let id: Int16 = 1
     let date: Date = Date()
     let type: String = ""
     var name: String = ""

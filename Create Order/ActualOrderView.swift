@@ -16,7 +16,7 @@ struct ActualOrderView: View {
         VStack {
             List {
                 ForEach (productsInOrder) { product in
-                    buttonListProduct(product: product, name: productName(productInOrder: product).name!, price: productName(productInOrder: product).re)
+//                    buttonListProduct(product: product, name: productName(productInOrder: product).name!, price: productName(productInOrder: product).re)
                 }
                 .onDelete(perform: deleteFromList)
                 .onMove(perform: moveFromList)
@@ -33,14 +33,14 @@ struct ActualOrderView: View {
         productsInOrder.move(fromOffsets: indexSet, toOffset: int)
     }
     
-    func productName(productInOrder: ProductInOrder) -> Product {
-        for productFromAll in coreDM.allProducts() {
-            if productInOrder.idProduct == productFromAll.id {
-                return productFromAll
-            }
-        }
-        return Product()
-    }
+//    func productName(productInOrder: ProductInOrder) -> CDProduct {
+//        for productFromAll in coreDM.allProducts() {
+//            if productInOrder.idProduct == productFromAll.id {
+//                return productFromAll
+//            }
+//        }
+//        return Product()
+//    }
     
 //    func changeTotal(actualproducts: [ActualProduct]) {
 //        subtotal = 0

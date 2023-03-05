@@ -10,8 +10,8 @@ import SwiftUI
 struct GroupView: View {
     @State var name = "-"
     @State var color = Color.green
-    @Binding var groupExtra: GroupExtra
-    @Binding var groupExtras: [GroupExtra]
+    @Binding var group: CDGroup
+    @Binding var groups: [CDGroup]
     @Binding var groupSelected: Bool
     let coreDM: CoreDataManager
     
@@ -25,14 +25,14 @@ struct GroupView: View {
     }
     
     func onApper(){
-        name = groupExtra.name ?? "Error"
+        name = group.name ?? "Error"
     }
     
     func updateButton() {
         withAnimation {
-            groupExtra.name = name
+            group.name = name
             coreDM.update()
-            groupExtras = coreDM.allGroups()
+            groups = coreDM.allGroups()
         }
     }
 }

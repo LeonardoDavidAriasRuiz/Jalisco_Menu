@@ -15,6 +15,6 @@ struct NewProduct {
     var gh: String = "0.00"
     var re: String = "0.00"
     var visible: Bool = true
-    var category: CategoryProduct = CategoryProduct()
+    var category: CDCategory = CDCategory()
     var color: Color = Color.green
 }

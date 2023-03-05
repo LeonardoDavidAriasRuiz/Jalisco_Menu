@@ -9,11 +9,11 @@ import SwiftUI
 
 struct OpcionsView: View {
     let coreDM: CoreDataManager
-    let idOrder: UUID
+    let idOrder: Int16
     @Binding var productsInOrder: [ProductInOrder]
     @State var customValor: String = ""
-    @Binding var selectedCategory: CategoryProduct
-    @State var producsInCategory = [Product]()
+    @Binding var selectedCategory: CDCategory
+    @State var producsInCategory = [CDProduct]()
     @Binding var quantitySelected: Int
     @Binding var customItemActive: Bool
 
@@ -71,7 +71,7 @@ struct OpcionsView: View {
                 LazyVGrid (columns: rows) {
                     ForEach (producsInCategory) { item in
                         Button(action: {
-                            let newProduct = ProductInOrder(idOrder: idOrder, idProduct: item.id!, quantity: quantitySelected)
+                            let newProduct = ProductInOrder(idOrder: idOrder, idProduct: item.id, quantity: quantitySelected)
                             productsInOrder.append(newProduct)
                             quantitySelected = 1
                         }, label: {
@@ -104,8 +104,8 @@ struct OpcionsView: View {
             producsInCategory = products()
         }
     }
-    func products() -> [Product] {
-        var products = [Product]()
+    func products() -> [CDProduct] {
+        var products = [CDProduct]()
         for product in coreDM.allProducts() {
             if product.idCategory == selectedCategory.id {
                 products.append(product)

@@ -21,7 +21,7 @@ struct CategoryView: View {
     @State private var categoryUpdate = Category()
     @State private var newProduct = NewProduct()
     
-    let category: CategoryProduct
+    let category: CDCategory
     
     var body: some View {
         VStack {

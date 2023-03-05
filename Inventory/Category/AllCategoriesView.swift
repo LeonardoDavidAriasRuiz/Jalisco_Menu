@@ -82,7 +82,7 @@ struct AllCategoriesView: View {
     
     func saveNewCategory() {
         withAnimation{
-            coreDM.createCategory(name: newCategory.name, color: newCategory.color)
+            coreDM.createCategory(category: newCategory)
             new = false
             newCategory.name = "-"
             newCategory.color = Color.green
@@ -105,7 +105,7 @@ struct AllCategoriesView: View {
     func deleteFromList(indexSet: IndexSet) {
         indexSet.forEach { index in
             let groupCategory = inventory.categories[index]
-            coreDM.deleteCategory(categoryProduct: groupCategory)
+            coreDM.deleteCategory(category: groupCategory)
         }
     }
 }
