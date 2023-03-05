@@ -16,7 +16,7 @@ struct CategoriesView: View {
             ForEach(coreDM.allCategories()){ category in
                 Button(action: {selectedCategory = category}, label: {
                     Text("\(category.name!)")}
-                ).bold().foregroundColor(Color(red: category.red, green: category.green, blue: category.blue))
+                ).bold().foregroundColor(Color(hex: category.color ?? "#32CD5A"))
             }
         }
     }

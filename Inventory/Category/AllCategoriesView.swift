@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct AllCategoriesView: View {
+    
+    @EnvironmentObject var inventory: Inventory
     private let coreDM = CoreDataManager()
     
     @State private var navigationTitle = "Categorías"
     @State private var updateView = false
     @State private var new = false
     
-    @EnvironmentObject private var inventory: Inventory
+    
     @State private var newCategory = Category()
     
     
@@ -46,7 +48,7 @@ struct AllCategoriesView: View {
                     label: {
                         HStack{
                             text(text: category.name ?? "Error")
-                            ItemColor().color(red: category.red, green: category.green, blue: category.blue)
+                            ItemColor().color(color: Color(hex: category.color ?? "#32CD5A"))
                         }.foregroundColor(Color.accentColor)
                     }
                 )
@@ -81,10 +83,10 @@ struct AllCategoriesView: View {
     func saveNewCategory() {
         withAnimation{
             coreDM.createCategory(name: newCategory.name, color: newCategory.color)
-            inventory.categories = coreDM.allCategories()
             new = false
             newCategory.name = "-"
             newCategory.color = Color.green
+            inventory.categories = coreDM.allCategories()
         }
     }
     
@@ -97,7 +99,7 @@ struct AllCategoriesView: View {
     
     func moveFromList(indexSet: IndexSet, int: Int) {
         inventory.categories.move(fromOffsets: indexSet, toOffset: int)
-        coreDM.update()
+        inventory.update()
     }
     
     func deleteFromList(indexSet: IndexSet) {
@@ -108,4 +110,7 @@ struct AllCategoriesView: View {
     }
 }
 
-
+struct Category {
+    var name: String = "-"
+    var color: Color = Color.green
+}

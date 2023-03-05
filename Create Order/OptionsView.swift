@@ -76,7 +76,7 @@ struct OpcionsView: View {
                             quantitySelected = 1
                         }, label: {
                             HStack {
-                                HStack{}.frame(maxHeight: .infinity).frame(maxWidth: 10).background(Color(red: item.red, green: item.green, blue: item.blue))
+                                HStack{}.frame(maxHeight: .infinity).frame(maxWidth: 10).background(Color(hex: item.color ?? "#32CD5A"))
                                 VStack {
                                     Section {
                                         Text("\(item.name!)").multilineTextAlignment(.center)

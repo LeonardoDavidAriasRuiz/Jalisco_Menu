@@ -52,28 +52,27 @@ struct CategoryView: View {
     
     var productsList: some View {
         List {
-            ForEach(products, id: \.self) { product in
-                if product.idCategory == category.id {
-                    NavigationLink(
-                        destination: ProductView(product: product),
-                        label: {
-                            VStack {
-                                HStack {
-                                    text(text: product.name ?? "Error")
-                                    text(text: product.printer ?? "Error")
-                                    text(text: String(format: "$%.2f", product.re))
-                                    text(text: String(format: "$%.2f", product.dd))
-                                    text(text: String(format: "$%.2f", product.gh))
-                                    ItemColor()
-                                        .color(red: product.red, green: product.green, blue: product.blue)
-                                }.foregroundColor(Color.accentColor)
-                            }
-                        }
-                    )
-                }
-            }
-            .onDelete(perform: deleteFromList)
-            .onMove(perform: moveFromList)
+//            ForEach(products, id: \.self) { product in
+//                if product.idCategory == category.id {
+//                    NavigationLink(
+//                        destination: ProductView(product: product),
+//                        label: {
+//                            HStack {
+//                                text(text: product.name ?? "Error")
+//                                text(text: product.printer ?? "Error")
+//                                text(text: String(format: "$%.2f", product.re))
+//                                text(text: String(format: "$%.2f", product.dd))
+//                                text(text: String(format: "$%.2f", product.gh))
+//                                ItemColor()
+//                                    .color(red: product.red, green: product.green, blue: product.blue)
+//                            }.foregroundColor(Color.accentColor)
+//                            
+//                        }
+//                    )
+//                }
+//            }
+//            .onDelete(perform: deleteFromList)
+//            .onMove(perform: moveFromList)
         }
     }
     
@@ -155,9 +154,7 @@ struct CategoryView: View {
     func updateButton() {
         withAnimation {
             category.name = categoryUpdate.name
-            category.red = GetColor().red(categoryUpdate.color)
-            category.green = GetColor().green(categoryUpdate.color)
-            category.blue = GetColor().blue(categoryUpdate.color)
+            category.color = categoryUpdate.color.hex
             update = false
         }
     }
@@ -185,10 +182,7 @@ struct CategoryView: View {
     
     func onAppear() {
         categoryUpdate.name = category.name ?? "Error"
-        categoryUpdate.color = Color(red: category.red, green: category.green, blue: category.blue)
-        categoryUpdate.red = category.red
-        categoryUpdate.green = category.green
-        categoryUpdate.blue = category.blue
+        categoryUpdate.color = Color(hex: category.color ?? "#32CD5A")
         navigationTitle = categoryUpdate.name
         if !categories.isEmpty {
             newProduct.category = categories[0]

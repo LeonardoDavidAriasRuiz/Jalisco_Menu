@@ -257,28 +257,35 @@ struct SeccionTextField: View {
     }
 }
 
-struct GetColor {
-    func red(_ color: Color) -> Double {
-        let colors = color.description.split(separator: " ")
-        if colors.endIndex > 3 {
-            return Double(colors[1]) ?? 0.207
+struct Titles {
+    var category: some View {
+        HStack {
+            TitleList(title: "Nombre")
+            TitleListCenter(title: "Color")
         }
-        return 0.207
     }
-    
-    func green(_ color: Color) -> Double {
-        let colors = color.description.split(separator: " ")
-        if colors.endIndex > 3 {
-            return Double(colors[2]) ?? 0.78
+    var product: some View {
+        HStack {
+            TitleList(title: "Nombre")
+            TitleList(title: "Impresora")
+            TitleList(title: "Regular")
+            TitleList(title: "Door Dash")
+            TitleList(title: "Grubhub")
+            TitleListCenter(title: "Color")
         }
-        return 0.78
     }
-    
-    func blue(_ color: Color) -> Double {
-        let colors = color.description.split(separator: " ")
-        if colors.endIndex > 3 {
-            return  Double(colors[3]) ?? 0.349
+    var group: some View {
+        HStack {
+            TitleList(title: "Nombre")
         }
-        return 0.349
+    }
+    var extra: some View {
+        HStack {
+            TitleList(title: "Nombre")
+            TitleList(title: "Impresora")
+            TitleList(title: "Regular")
+            TitleList(title: "Door Dash")
+            TitleList(title: "Grubhub")
+        }
     }
 }

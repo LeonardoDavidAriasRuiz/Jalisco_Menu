@@ -47,4 +47,8 @@ class Inventory: ObservableObject {
         orders                 = cdm.allOrders()
         productsOfEachOrder    = cdm.allOrderProducts()
     }
+    
+    func update() {
+        cdm.update()
+    }
 }

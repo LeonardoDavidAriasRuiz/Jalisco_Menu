@@ -38,12 +38,7 @@ class CoreDataManager {
         product.id = UUID()
         product.name = newProduct.name
         product.printer = newProduct.printer
-        product.dd = Double(newProduct.dd) ?? 0.207
-        product.gh = Double(newProduct.gh) ?? 0.78
-        product.re = Double(newProduct.re) ?? 0.349
-        product.red = newProduct.red
-        product.green = newProduct.green
-        product.blue = newProduct.blue
+        product.color = newProduct.color.hex
         product.visible = newProduct.visible
         product.idCategory = newProduct.category.id
         
@@ -118,12 +113,7 @@ class CoreDataManager {
         let category = CategoryProduct(context: context)
         category.id = UUID()
         category.name = name
-        let colors = color.description.split(separator: " ")
-        if colors.endIndex > 3 {
-            category.red = Double(colors[1]) ?? 0.207
-            category.green = Double(colors[2]) ?? 0.78
-            category.blue = Double(colors[3]) ?? 0.349
-        }
+        category.color = color.hex
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()

@@ -61,7 +61,7 @@ struct UpdateProductView: View {
         newProduct.gh = String(product.gh)
         newProduct.re = String(product.re)
         newProduct.visible = product.visible
-        newProduct.color = Color(red: product.red, green: product.green, blue: product.blue)
+        newProduct.color = Color(hex: product.color ?? "#32CD5A")
         categories = coreDM.allCategories()
         for categoryProduct in categories {
             if (categoryProduct.id == product.idCategory) {
@@ -79,9 +79,7 @@ struct UpdateProductView: View {
             product.re = Double(newProduct.re) ?? 0.00
             product.visible = newProduct.visible
             product.idCategory = newProduct.category.id
-            product.red = GetColor().red(newProduct.color)
-            product.green = GetColor().green(newProduct.color)
-            product.blue = GetColor().blue(newProduct.color)
+            product.color = newProduct.color.hex
             
             coreDM.update()
             products = coreDM.allProducts()
