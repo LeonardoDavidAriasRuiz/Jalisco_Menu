@@ -10,7 +10,7 @@ import SwiftUI
 struct OpcionsView: View {
     let coreDM: CoreDataManager
     let idOrder: Int16
-    @Binding var productsInOrder: [ProductInOrder]
+//    @Binding var productsInOrder: [ProductInOrder]
     @State var customValor: String = ""
     @Binding var selectedCategory: CDCategory
     @State var producsInCategory = [CDProduct]()
@@ -71,9 +71,9 @@ struct OpcionsView: View {
                 LazyVGrid (columns: rows) {
                     ForEach (producsInCategory) { item in
                         Button(action: {
-                            let newProduct = ProductInOrder(idOrder: idOrder, idProduct: item.id, quantity: quantitySelected)
-                            productsInOrder.append(newProduct)
-                            quantitySelected = 1
+//                            let newProduct = ProductInOrder(idOrder: idOrder, idProduct: item.id, quantity: quantitySelected)
+//                            productsInOrder.append(newProduct)
+//                            quantitySelected = 1
                         }, label: {
                             HStack {
                                 HStack{}.frame(maxHeight: .infinity).frame(maxWidth: 10).background(Color(hex: item.color ?? "#32CD5A"))
@@ -82,7 +82,7 @@ struct OpcionsView: View {
                                         Text("\(item.name!)").multilineTextAlignment(.center)
                                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading).padding(.leading, 10)
                                     Section {
-                                        Text(String(format: "$%.2f", item.re)).foregroundColor(.secondary)
+                                        Text(String(format: "$%.2f", item.price1)).foregroundColor(.secondary)
                                     }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing).padding(.trailing, 10)
                                 }
                             }.frame(maxWidth: .infinity)
@@ -107,9 +107,9 @@ struct OpcionsView: View {
     func products() -> [CDProduct] {
         var products = [CDProduct]()
         for product in coreDM.allProducts() {
-            if product.idCategory == selectedCategory.id {
-                products.append(product)
-            }
+//            if product.idCategory == selectedCategory.id {
+//                products.append(product)
+//            }
         }
         return products
     }

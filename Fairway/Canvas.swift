@@ -174,7 +174,7 @@ struct ChooseColor: View {
     @Binding var color: Color
     var body: some View {
         ColorPicker("", selection: $color)
-            .frame(width: 30)
+            .frame(width: 30, height: 0)
             .padding(20)
             .frame(maxWidth: .infinity)
     }
@@ -269,8 +269,7 @@ struct Titles {
             TitleList(title: "Nombre")
             TitleList(title: "Impresora")
             TitleList(title: "Regular")
-            TitleList(title: "Door Dash")
-            TitleList(title: "Grubhub")
+            TitleList(title: "Driver")
             TitleListCenter(title: "Color")
         }
     }
@@ -284,8 +283,7 @@ struct Titles {
             TitleList(title: "Nombre")
             TitleList(title: "Impresora")
             TitleList(title: "Regular")
-            TitleList(title: "Door Dash")
-            TitleList(title: "Grubhub")
+            TitleList(title: "Driver")
         }
     }
 }

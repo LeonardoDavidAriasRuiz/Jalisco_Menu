@@ -2,39 +2,32 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDCategory" representedClassName="CDCategory" syncable="YES" codeGenerationType="class">
         <attribute name="color" attributeType="String" defaultValueString="#32CD5A"/>
-        <attribute name="id" attributeType="Integer 16" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="-"/>
-        <relationship name="products_in_category" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDProduct" inverseName="category_of_product" inverseEntity="CDProduct"/>
     </entity>
     <entity name="CDExtra" representedClassName="CDExtra" syncable="YES" codeGenerationType="class">
-        <attribute name="dd" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="gh" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="id" attributeType="Integer 16" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="price1" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="price2" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="printer" attributeType="String"/>
-        <attribute name="re" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="CDGroup" representedClassName="CDGroup" syncable="YES" codeGenerationType="class">
-        <attribute name="id" attributeType="Integer 16" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <entity name="CDOrder" representedClassName="CDOrder" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" attributeType="Integer 16" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="total" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="type" attributeType="String"/>
     </entity>
     <entity name="CDProduct" representedClassName="CDProduct" syncable="YES" codeGenerationType="class">
         <attribute name="color" attributeType="String" defaultValueString="#32CD5A"/>
-        <attribute name="dd" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="gh" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="id" attributeType="Integer 16" minValueString="0" defaultValueString="1" usesScalarValueType="YES"/>
-        <attribute name="idCategory" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="-"/>
+        <attribute name="price1" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="price2" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="printer" attributeType="String" defaultValueString="-"/>
-        <attribute name="re" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="visible" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="category_of_product" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDCategory" inverseName="products_in_category" inverseEntity="CDCategory"/>
+    </entity>
+    <entity name="CDProductCategory" representedClassName="CDProductCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="categoryID" attributeType="String" defaultValueString=""/>
+        <attribute name="productID" attributeType="String" defaultValueString=""/>
     </entity>
 </model>

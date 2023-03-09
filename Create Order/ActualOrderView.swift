@@ -9,28 +9,28 @@ import SwiftUI
 
 struct ActualOrderView: View {
     let coreDM: CoreDataManager
-    @Binding var productsInOrder: [ProductInOrder]
+//    @Binding var productsInOrder: [ProductInOrder]
     @State var subtotal: Double = 0
     
     var body: some View {
         VStack {
-            List {
-                ForEach (productsInOrder) { product in
-//                    buttonListProduct(product: product, name: productName(productInOrder: product).name!, price: productName(productInOrder: product).re)
-                }
-                .onDelete(perform: deleteFromList)
-                .onMove(perform: moveFromList)
-            }
+//            List {
+//                ForEach (productsInOrder) { product in
+////                    buttonListProduct(product: product, name: productName(productInOrder: product).name!, price: productName(productInOrder: product).re)
+//                }
+//                .onDelete(perform: deleteFromList)
+//                .onMove(perform: moveFromList)
+//            }
 //            .onChange(of: order.products, perform: changeTotal)
 //            total
         }
     }
     
     func deleteFromList(indexSet: IndexSet) {
-        productsInOrder.remove(atOffsets: indexSet)
+//        productsInOrder.remove(atOffsets: indexSet)
     }
     func moveFromList(indexSet: IndexSet, int: Int) {
-        productsInOrder.move(fromOffsets: indexSet, toOffset: int)
+//        productsInOrder.move(fromOffsets: indexSet, toOffset: int)
     }
     
 //    func productName(productInOrder: ProductInOrder) -> CDProduct {
@@ -75,29 +75,29 @@ struct ActualOrderView: View {
     }
 //}
 //
-struct buttonListProduct: View {
-    var product: ProductInOrder
-    var name: String
-    var price: Double
-
-    var body: some View {
-        Button(action: {}, label:
-                {
-            VStack {
-                HStack {
-                    Text("\(product.quantity)").foregroundColor(.green).bold().font(.title2)
-                    Section {
-                        Text("\(name)").foregroundColor(.primary)
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    Section {
-                        Text(String(format: "$%.2f", price * Double(product.quantity))).foregroundColor(.secondary)
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-                }
-//                ForEach (product.modifires) { modifire in
-//                    Text("\(modifire.name)").foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)
+//struct buttonListProduct: View {
+//    var product: ProductInOrder
+//    var name: String
+//    var price: Double
+//
+//    var body: some View {
+//        Button(action: {}, label:
+//                {
+//            VStack {
+//                HStack {
+//                    Text("\(product.quantity)").foregroundColor(.green).bold().font(.title2)
+//                    Section {
+//                        Text("\(name)").foregroundColor(.primary)
+//                    }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+//                    Section {
+//                        Text(String(format: "$%.2f", price * Double(product.quantity))).foregroundColor(.secondary)
+//                    }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
 //                }
-
-            }
-        })
-    }
-}
+////                ForEach (product.modifires) { modifire in
+////                    Text("\(modifire.name)").foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)
+////                }
+//
+//            }
+//        })
+//    }
+//}

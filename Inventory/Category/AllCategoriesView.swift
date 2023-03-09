@@ -110,7 +110,4 @@ struct AllCategoriesView: View {
     }
 }
 
-struct Category {
-    var name: String = "-"
-    var color: Color = Color.green
-}
+

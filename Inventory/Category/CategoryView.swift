@@ -19,7 +19,7 @@ struct CategoryView: View {
     @State private var products = CoreDataManager().allProducts()
     @State private var categories = CoreDataManager().allCategories()
     @State private var categoryUpdate = Category()
-    @State private var newProduct = NewProduct()
+    @State private var newProduct = Product()
     
     let category: CDCategory
     
@@ -93,14 +93,11 @@ struct CategoryView: View {
             HStack {
                 TextFieldText(text: $newProduct.name)
                 TextFieldText(text: $newProduct.printer)
-                TextFieldNumber(text: $newProduct.re)
-                TextFieldNumber(text: $newProduct.dd)
-                TextFieldNumber(text: $newProduct.gh)
+                TextFieldNumber(text: $newProduct.price1)
+                TextFieldNumber(text: $newProduct.price2)
                 ChooseColor(color: $newProduct.color)
             }
             HStack {
-                CategoryPicker(categories: $categories, selectedCategory: $newProduct.category)
-                VisibleToggle(visible: $newProduct.visible)
                 Button(action: saveNewProduct, label: {
                     SaveButton()}
                 )
@@ -110,7 +107,7 @@ struct CategoryView: View {
     
     func saveNewProduct() {
         withAnimation {
-            coreDM.createProduct(newProduct: newProduct)
+            coreDM.createProduct(product: newProduct)
             updateList()
             getProductsList()
             new = false
@@ -184,9 +181,6 @@ struct CategoryView: View {
         categoryUpdate.name = category.name ?? "Error"
         categoryUpdate.color = Color(hex: category.color ?? "#32CD5A")
         navigationTitle = categoryUpdate.name
-        if !categories.isEmpty {
-            newProduct.category = categories[0]
-        }
         getProductsList()
     }
     func getProductsList() {

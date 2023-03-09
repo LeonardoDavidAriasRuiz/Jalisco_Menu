@@ -8,36 +8,41 @@
 import SwiftUI
 
 struct InventoryView: View {
+    
+    @State private var selected = "Categorías"
+    
+    private let category = "Categorías"
+    private let products = "Productos"
+    private let groups = "Grupos"
+    private let extras = "Extras"
+    
     var body: some View {
-        TabView {
-            AllCategoriesView()
+        TabView (selection: $selected) {
+            CategoriesView()
                 .tabItem {
-                    Text("Categorías")
-                    
+                    Image(systemName: "list.bullet.rectangle.fill")
+                    Text(category)
                 }
+                .tag(category)
             ProductsView()
                 .tabItem {
-                    Text("Productos")
-                    
+                    Image(systemName: "takeoutbag.and.cup.and.straw.fill")
+                    Text(products)
                 }
-            AllCategoriesView()
+                .tag(products)
+            GroupsView()
                 .tabItem {
-                    Text("Grupos")
-                    
+                    Image(systemName: "plus.forwardslash.minus")
+                    Text(groups)
                 }
-            AllCategoriesView()
+                .tag(groups)
+            ExtrasView()
                 .tabItem {
-                    Text("Extras")
-                    
+                    Image(systemName: "star")
+                    Text(extras)
                 }
-        }.toolbar {
-            Menu {
-                Text("Productos")
-            } label: {
-                Image(systemName: "ellipsis.circle")
-            }
-            
-        }
+                .tag(extras)
+        }.navigationTitle(selected)
     }
 }
 

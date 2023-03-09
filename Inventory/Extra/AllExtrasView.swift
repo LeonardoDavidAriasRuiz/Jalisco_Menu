@@ -27,9 +27,8 @@ struct AllExtrasView: View {
                     HStack{
                         Text(product.name ?? "Error").frame(maxWidth: .infinity, alignment: .leading)
                         Text(product.printer ?? "Error").frame(maxWidth: .infinity, alignment: .leading)
-                        Text("\(product.re )").frame(maxWidth: .infinity, alignment: .leading)
-                        Text("\(product.dd )").frame(maxWidth: .infinity, alignment: .leading)
-                        Text("\(product.gh )").frame(maxWidth: .infinity, alignment: .leading)
+                        Text("\(product.price1 )").frame(maxWidth: .infinity, alignment: .leading)
+                        Text("\(product.price2 )").frame(maxWidth: .infinity, alignment: .leading)
                     }
 //                })
             }.onDelete(perform: { indexSet in

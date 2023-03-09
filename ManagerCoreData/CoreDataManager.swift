@@ -33,14 +33,13 @@ class CoreDataManager {
         }
     }
     
-    func createProduct(newProduct: NewProduct) {
-        let product = CDProduct(context: context)
-        product.id = 1
-        product.name = newProduct.name
-        product.printer = newProduct.printer
-        product.color = newProduct.color.hex
-        product.visible = newProduct.visible
-        product.idCategory = newProduct.category.id
+    func createProduct(product: Product) {
+        let CDproduct = CDProduct(context: context)
+        CDproduct.name = product.name
+        CDproduct.printer = product.printer
+        CDproduct.price1 = Double(product.price1) ?? 0.00
+        CDproduct.price2 = Double(product.price2) ?? 0.00
+        CDproduct.color = product.color.hex
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()
@@ -71,14 +70,12 @@ class CoreDataManager {
         
     }
     
-    func createExtra(name: String,printer: String, priceDD: Double, priceGH: Double, priceRE: Double) {
-        let extra = CDExtra(context: context)
-        extra.id = 1
-        extra.name = name
-        extra.printer = printer
-        extra.dd = priceDD
-        extra.gh = priceGH
-        extra.re = priceRE
+    func createExtra(extra: Extra) {
+        let CDextra = CDExtra(context: context)
+        CDextra.name = extra.name
+        CDextra.printer = extra.printer
+        CDextra.price1 = Double(extra.price1) ?? 0.00
+        CDextra.price2 = Double(extra.price2) ?? 0.00
         
         do {
             try CoreDataManager.persistentContainer.viewContext.save()
@@ -111,7 +108,6 @@ class CoreDataManager {
     
     func createCategory(category: Category) {
         let CDcategory = CDCategory(context: context)
-        CDcategory.id = 1
         CDcategory.name = category.name
         CDcategory.color = category.color.hex
         
@@ -145,7 +141,6 @@ class CoreDataManager {
     
     func createGroup(name: String) {
         let groupExtra = CDGroup(context: context)
-        groupExtra.id = 1
         groupExtra.name = name
         
         do {
@@ -178,7 +173,6 @@ class CoreDataManager {
     
     func createOrder(newOrder: NewOrder) {
         let order = CDOrder(context: context)
-        order.id = 1
         order.date = newOrder.date
         order.type = newOrder.type
         order.name = newOrder.name
@@ -210,5 +204,55 @@ class CoreDataManager {
             CoreDataManager.persistentContainer.viewContext.rollback()
             print("Failed to save context \(error)")
         }
+    }
+    
+    func createRelationProductInCategory(product: CDProduct, category: CDCategory) {
+        let relation = CDProductCategory(context: context)
+        let productID = String(reflecting: product.id)
+        let categoryID = String(reflecting: category.id)
+        relation.productID = productID
+        relation.categoryID = categoryID
+        
+//        do {
+//            try CoreDataManager.persistentContainer.viewContext.save()
+//        } catch {
+//            print("Fail to save the product \(error)")
+//        }
+    }
+    
+    func allProductsInCategories() -> [CDProductCategory] {
+        let fetchRequest: NSFetchRequest<CDProductCategory> = CDProductCategory.fetchRequest()
+        do {
+            return try CoreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
+        } catch {
+            return []
+        }
+    }
+    
+    func deleteRelationProductInCategory(productCategory: CDProductCategory) {
+        
+        CoreDataManager.persistentContainer.viewContext.delete(productCategory)
+//
+//        do {
+//            try CoreDataManager.persistentContainer.viewContext.save()
+//        } catch {
+//            CoreDataManager.persistentContainer.viewContext.rollback()
+//            print("Failed to save context \(error)")
+//        }
+    }
+}
+
+extension NSManagedObjectID {
+    var uuid: UUID {
+        let urldString = self.uriRepresentation().absoluteString
+        let urlArray = urldString.split(separator: "/")
+        let uuidString = String(urlArray[1])
+        print(CoreDataManager().allCategories()[0].id)
+        print(CoreDataManager().allCategories()[1].id)
+        print(CoreDataManager().allCategories()[2].id)
+        print(CoreDataManager().allCategories()[3].id)
+        
+        print(uuidString)
+        return UUID(uuidString: uuidString)!
     }
 }

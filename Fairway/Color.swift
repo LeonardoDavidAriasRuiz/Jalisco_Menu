@@ -29,9 +29,7 @@ extension Color {
 
         self.init(red: red, green: green, blue: blue)
     }
-}
-
-extension Color {
+    
     var hex: String {
         let uiColor = UIColor(self)
         var red: CGFloat = 0

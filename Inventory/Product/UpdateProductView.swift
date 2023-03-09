@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UpdateProductView: View {
-    @State private var newProduct: NewProduct = NewProduct()
+    @State private var newProduct: Product = Product()
     @State private var selectedCategory: CDCategory = CDCategory()
     
     let coreDM: CoreDataManager = CoreDataManager()
@@ -57,10 +57,8 @@ struct UpdateProductView: View {
     private func onApper() {
         newProduct.name = product.name ?? "Error"
         newProduct.printer = product.printer ?? "Error"
-        newProduct.dd = String(product.dd)
-        newProduct.gh = String(product.gh)
-        newProduct.re = String(product.re)
-        newProduct.visible = product.visible
+        newProduct.price1 = String(product.price1)
+        newProduct.price2 = String(product.price2)
         newProduct.color = Color(hex: product.color ?? "#32CD5A")
         categories = coreDM.allCategories()
 //        for categoryProduct in categories {
@@ -74,10 +72,8 @@ struct UpdateProductView: View {
         withAnimation {
             product.name = newProduct.name
             product.printer = newProduct.printer
-            product.dd = Double(newProduct.dd) ?? 0.00
-            product.gh = Double(newProduct.gh) ?? 0.00
-            product.re = Double(newProduct.re) ?? 0.00
-            product.visible = newProduct.visible
+            product.price1 = Double(newProduct.price1) ?? 0.00
+            product.price2 = Double(newProduct.price2) ?? 0.00
 //            product.idCategory = newProduct.category.id
             product.color = newProduct.color.hex
             
